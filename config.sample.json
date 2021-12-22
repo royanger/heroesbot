@@ -1,5 +1,6 @@
 {
   "token": "token from creating the bot",
   "clientId": "id of the bot inside discord",
-  "guildId": "if of the discord server"
+  "guildId": "if of the discord server",
+  "logPath": "directory and name of log file -- nodemon is configured for /logs/"
 }

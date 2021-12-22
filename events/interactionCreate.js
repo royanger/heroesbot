@@ -1,7 +1,9 @@
+const logger = require('../libs/logger');
+
 module.exports = {
   name: 'interactionCreate',
   execute(interaction) {
-    console.log(
+    logger.info(
       `${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`
     );
   },
