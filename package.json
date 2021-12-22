@@ -1,0 +1,32 @@
+{
+  "name": "heroesbot",
+  "version": "1.0.0",
+  "description": "A discord bot for the Helpless Heroes Destiny clan.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royanger/heroesbot.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Roy Anger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/royanger/heroesbot/issues"
+  },
+  "homepage": "https://github.com/royanger/heroesbot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.25.2",
+    "discord.js": "^13.3.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0"
+  }
+}
