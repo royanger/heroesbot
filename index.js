@@ -1,14 +1,56 @@
-// Require the necessary discord.js classes
-const { Client, Intents } = require('discord.js');
+const fs = require('fs');
+const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
-// Create a new client instance
+// create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
+const eventFiles = fs
+  .readdirSync('./events')
+  .filter((file) => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
+  }
+}
+
+client.commands = new Collection();
+
+const commandFiles = fs
+  .readdirSync('./commands')
+  .filter((file) => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.data.name, command);
+}
+
+// message when client ready
 client.once('ready', () => {
-  console.log('Client ready to log into discord');
+  console.log('Client ready -- logging into discord');
 });
 
-// Login to Discord with your client's token
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isCommand()) return;
+
+  const command = client.commands.get(interaction.commandName);
+
+  if (!command) return;
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    return interaction.reply({
+      content: 'There was an error while executing this command!',
+      ephemeral: true,
+    });
+  }
+});
+
+// login to discord
 client.login(token);

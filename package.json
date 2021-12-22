@@ -4,7 +4,8 @@
   "description": "A discord bot for the Helpless Heroes Destiny clan.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon ./index.js",
+    "commands": "node ./deploy-commands.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
