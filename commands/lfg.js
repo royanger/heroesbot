@@ -17,78 +17,48 @@ events.map((event) => {
 module.exports = {
   data,
   async execute(interaction, client) {
-    //  interaction.guild.channels.cache.clear();
-
-    //  console.log(await interaction.options.data);
-    //  console.log(await interaction);
-
-    //  console.log('========');
-    //  console.log('========');
     let userId = interaction.user.id;
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
 
+    // let channel
+    // let errorMessage
+
     if (Member.voice.channel) {
-      console.log(
-        `${Member.user.tag} is connected to ${Member.voice.channel.name} ${Member.voice.channel.id}!`
+      let channel = Member.voice.channel;
+
+      let selectedEvent = events.filter((obj) => {
+        return obj.abbreviation === interaction.options.data[0].name;
+      });
+      console.log(selectedEvent[0]);
+
+      let invite = await channel.createInvite({
+        maxAge: 600,
+        maxUses: 20,
+        reason: 'LFG Invite',
+      });
+
+      await interaction.reply(
+        `LFG Command successful\nUser: ${Member.user.tag}\nChannel: ${
+          channel.name
+        } (${channel.id})\nCurrent Channel size: ${
+          channel.userLimit
+        }\n\n\nEvent (by abbreviation): ${
+          interaction.options.data[0].name
+        }\nEvent Name: ${selectedEvent[0].name}\nEvent Light Level: ${
+          selectedEvent[0].lightLevel
+        }\nParty Size: ${selectedEvent[0].size}\n\nCurrent Party Size: ${
+          interaction.options.data[0].value
+        }\nTarget Party Size: ${selectedEvent[0].size}\nNeed: ${
+          selectedEvent[0].size - interaction.options.data[0].value
+        }\nInvite Code: ${invite.code}`
       );
     } else {
       // The member is not connected to a voice channel.
-      console.log(`${Member.user.tag} is not connected.`);
+      // errorMessage = 'You must join a Voice Channel before using this command.';
+      await interaction.reply(
+        `You must join a Voice Channel before using this command.`
+      );
     }
-
-    //  let test = Member.guild.channels.cache;
-
-    //  let filteredChannels = test.filter(
-    //    (channel) => channel.type === 'GUILD_VOICE'
-    //  );
-    //  filteredChannels.map((channel) => {
-    //    console.log(`CHANNEL  ${channel.name}`);
-    //    console.log(channel.members.user.id);
-    //  });
-    //  console.log('========');
-    //  console.log('========');
-
-    //  console.log(
-    //    filteredChannels.some((value) => {
-    //      console.log(value.members);
-    //      value.members === userId;
-    //    })
-    //  );
-
-    //  console.log('voiceStates for Member');
-
-    //  console.log(Member.voice.channel);
-
-    //  console.log(await interaction.guild.channels.fetch());
-
-    //  let client = await client.guilds.fetch('890296114920718416');
-
-    //  let voiceChannels = await interaction.guild.channels.fetch();
-
-    //  filteredChannels.map((channel) => {
-    //    console.log(`CHANNEL  ${channel.name}`);
-    //    console.log(channel.members);
-    //  });
-    //  let test = await client.channels.fetch();
-    //  console.log('cleint', test);
-    //  client.guilds.channels;
-
-    //  client.channels.cache.clear();
-
-    //  console.log('======== Clearing Cache?');
-
-    //  let voiceChannels2 = await interaction.guild.channels.cache;
-    //  let filteredChannels2 = voiceChannels2.filter(
-    //    (channel) => channel.type === 'GUILD_VOICE'
-    //  );
-    //  filteredChannels2.map((channel) => {
-    //    console.log(`CHANNEL  ${channel.name}`);
-    //    console.log(channel.members);
-    //  });
-    console.log('========');
-    console.log('========');
-
-    await interaction.reply('Holy LFG TWO Batman!!');
   },
 };

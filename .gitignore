@@ -1,4 +1,4 @@
 node_modules
 .env
-bot.config.json
+configs/bot.config.json
 logs
