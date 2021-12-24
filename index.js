@@ -4,7 +4,13 @@ const { token } = require('./configs/bot.config.json');
 const logger = require('./libs/logger');
 
 // create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_VOICE_STATES,
+  ],
+});
 
 // load events and their associated loggers
 const eventFiles = fs
@@ -19,6 +25,15 @@ for (const file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args));
   }
 }
+
+// simple command to reply to a message
+client.on('messageCreate', (message) => {
+  if (message.content === 'test') {
+    message.reply({
+      content: 'This is a reply',
+    });
+  }
+});
 
 // load commands and their associated handlers
 client.commands = new Collection();
