@@ -1,8 +1,8 @@
 const bunyan = require('bunyan');
-const { logPath } = require('../configs/bot.config.json');
+const { logPath, botLoggerName } = require('../configs/bot.config.json');
 
 const log = bunyan.createLogger({
-  name: 'HeroesBot',
+  name: botLoggerName,
   streams: [{ path: logPath }],
 });
 
