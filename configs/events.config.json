@@ -9,7 +9,7 @@
     "name": "Master Vault of Glass",
     "abbreviation": "mvog",
     "size": 6,
-    "lightLevel": "1500"
+    "lightLevel": "1360"
   },
   {
     "name": "Deep Stone Crypt",
@@ -30,26 +30,26 @@
     "lightLevel": "1100"
   },
   {
-    "name": "casual",
-    "abbreviation": "cas",
-    "size": "6",
+    "name": "Grasp of Avarice",
+    "abbreviation": "ga",
+    "size": "3",
+    "lightLevel": "1310"
+  },
+  {
+    "name": "Master Grasp of Avarice",
+    "abbreviation": "mga",
+    "size": "3",
+    "lightLevel": "1360"
+  },
+  {
+    "name": "Prophecy",
+    "abbreviation": "ph",
+    "size": "3",
     "lightLevel": "1100"
   },
   {
-    "name": "Iron Banner",
-    "abbreviation": "ib",
-    "size": "6",
-    "lightLevel": "1500"
-  },
-  {
-    "name": "Trials of Osiris",
-    "abbreviation": "trials",
-    "size": "3",
-    "lightLevel": "1500"
-  },
-  {
-    "name": "Competitive",
-    "abbreviation": "comp",
+    "name": "Pit of Heresy",
+    "abbreviation": "poh",
     "size": "3",
     "lightLevel": "1100"
   },
@@ -57,18 +57,42 @@
     "name": "Shattered Throne",
     "abbreviation": "sh",
     "size": "3",
-    "lightLevel": "1500"
+    "lightLevel": "1100"
   },
   {
-    "name": "Pit of Heresy",
-    "abbreviation": "poh",
-    "size": "3",
-    "lightLevel": "1500"
+    "name": "Gambit",
+    "abbreviation": "gb",
+    "size": "4",
+    "lightLevel": "1100"
   },
   {
-    "name": "Prophecy",
-    "abbreviation": "ph",
+    "name": "Iron Banner",
+    "abbreviation": "ib",
+    "size": "6",
+    "lightLevel": "1320"
+  },
+  {
+    "name": "Trials of Osiris",
+    "abbreviation": "trials",
     "size": "3",
-    "lightLevel": "1500"
+    "lightLevel": "1330"
+  },
+  {
+    "name": "Competitive Crucible",
+    "abbreviation": "comp",
+    "size": "3",
+    "lightLevel": "1100"
+  },
+  {
+    "name": "Casual PVP (6 Person)",
+    "abbreviation": "cas6",
+    "size": "6",
+    "lightLevel": "1100"
+  },
+  {
+    "name": "Casual PVP (3 Person)",
+    "abbreviation": "cas3",
+    "size": "6",
+    "lightLevel": "1100"
   }
 ]
