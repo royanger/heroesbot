@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./configs/bot.config.json');
+const activities = require('./configs/activity.config.json');
 const logger = require('./libs/logger');
 
 // create a new client instance
@@ -48,6 +49,11 @@ for (const file of commandFiles) {
 }
 
 client.on('interactionCreate', async (interaction) => {
+  //  randomly update bot activity
+  let random = Math.floor(Math.random() * activities.length);
+  client.user.setActivity(activities[random].name, {
+    type: activities[random].type,
+  });
   if (!interaction.isCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
@@ -66,5 +72,15 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-// login to discord
-client.login(token);
+// login to discord and set random activity
+try {
+  client.login(token).then(() => {
+    // randomly set bot activity
+    let random = Math.floor(Math.random() * activities.length);
+    client.user.setActivity(activities[random].name, {
+      type: activities[random].type,
+    });
+  });
+} catch (error) {
+  logger.fatal('Could not login into server');
+}
