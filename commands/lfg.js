@@ -8,7 +8,6 @@ const {
   voiceChannelPrefix,
 } = require('../configs/bot.config.json');
 const logger = require('../libs/logger');
-// const { Message } = require('discord.js');
 
 // add /lfg command
 let data = new SlashCommandBuilder()

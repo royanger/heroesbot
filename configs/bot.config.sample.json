@@ -2,6 +2,8 @@
   "token": "token from creating the bot",
   "clientId": "id of the bot inside discord",
   "guildId": "id of the discord server",
+  "botName": "Name of the bot as you want it to appear inside commands",
+  "botLoggerName": "Version of Bot name for the log file.",
   "logPath": "directory and name of log file -- nodemon is configured for /logs/",
   "lfgChannel": "id of the LFG channel. The command will only work in this channel",
   "voiceChannelPrefix": "prefix of the voice channels. You could do 'Fireteam 1/2/3' or 'LFG 1/2/3'",
