@@ -1,6 +1,9 @@
 {
   "token": "token from creating the bot",
   "clientId": "id of the bot inside discord",
-  "guildId": "if of the discord server",
-  "logPath": "directory and name of log file -- nodemon is configured for /logs/"
+  "guildId": "id of the discord server",
+  "logPath": "directory and name of log file -- nodemon is configured for /logs/",
+  "lfgChannel": "id of the LFG channel. The command will only work in this channel",
+  "voiceChannelPrefix": "prefix of the voice channels. You could do 'Fireteam 1/2/3' or 'LFG 1/2/3'",
+  "lfgRole": "ID of the role that will get pinged by the post. This should probably be the clan role or a specific 'LFG' role."
 }
