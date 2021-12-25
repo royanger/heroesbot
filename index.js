@@ -28,6 +28,7 @@ for (const file of eventFiles) {
 }
 
 // simple command to reply to a message
+// saved for later, maybe
 client.on('messageCreate', (message) => {
   if (message.content === 'test') {
     message.reply({

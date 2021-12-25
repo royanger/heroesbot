@@ -87,23 +87,20 @@ module.exports = {
     channel.setUserLimit(partySize);
     logger.info(`Changed ${channel.name} to size of ${partySize}`);
 
-    interaction.reply(
-      `${role}
-      LFG Command successful\nUser: ${Member.user.tag}\nChannel: ${
-        channel.name
-      } (${channel.id})\nCurrent Channel size: ${
-        channel.userLimit
-      }\n\n\nEvent (by abbreviation): ${
-        interaction.options.data[0].name
-      }\nEvent Name: ${selectedEvent[0].name}\nEvent Light Level: ${
-        selectedEvent[0].lightLevel
-      }\nParty Size: ${selectedEvent[0].size}\n\nCurrent Party Size: ${
-        interaction.options.data[0].value
-      }\nTarget Party Size: ${selectedEvent[0].size}\nNeed: ${
+    let displayName =
+      Member.nickname !== null ? Member.nickname : Member.user.username;
+
+    interaction.channel.send(
+      `${role}\n\n**${displayName} is looking for ${
         selectedEvent[0].size - interaction.options.data[0].value
-      }\nInvite Code: ${invite.code}`
+      } for ${selectedEvent[0].name}** (Light LeveL: ${
+        selectedEvent[0].lightLevel
+      })\n\n${invite.url}`
     );
 
-    interaction.followUp(invite.code);
+    interaction.reply({
+      content: `You've created an LFG post!`,
+      ephemeral: true,
+    });
   },
 };
