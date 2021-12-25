@@ -1,7 +1,13 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const events = require('../configs/events.config.json');
-const { guildId, lfgChannel, lfgRole } = require('../configs/bot.config.json');
+const {
+  guildId,
+  lfgChannel,
+  lfgRole,
+  voiceChannelPrefix,
+} = require('../configs/bot.config.json');
 const logger = require('../libs/logger');
+// const { Message } = require('discord.js');
 
 // add /lfg command
 let data = new SlashCommandBuilder()
@@ -30,8 +36,6 @@ module.exports = {
     });
     let partySize = selectedEvent[0].size;
 
-    console.log('lfg role', role);
-
     // member is not in the correct text channel to use command
     if (interaction.channelId !== lfgChannel) {
       logger.info(
@@ -56,7 +60,20 @@ module.exports = {
       return;
     }
 
-    //
+    // check that the person in the right voice channels
+    // use voiceChannelPrefix from config
+    let vcName = channel.name;
+    let regEx = '^' + voiceChannelPrefix;
+    let regex = new RegExp(regEx, 'i');
+
+    if (!vcName.match(regex)) {
+      logger.info(`${Member.user.tag} was not connected to an LFG channel`);
+      await interaction.reply({
+        content: `You must join one of the LFG channels. They begin with **${voiceChannelPrefix}**`,
+        ephemeral: true,
+      });
+      return;
+    }
 
     // check that the member supplied a current party size that is
     // smaller than the event party size.
