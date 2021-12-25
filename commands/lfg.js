@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const events = require('../configs/events.config.json');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const {
   guildId,
   lfgChannel,
@@ -107,13 +108,43 @@ module.exports = {
     let displayName =
       Member.nickname !== null ? Member.nickname : Member.user.username;
 
-    interaction.channel.send(
-      `${role}\n\n**${displayName} is looking for ${
-        selectedEvent[0].size - interaction.options.data[0].value
-      } for ${selectedEvent[0].name}** (Light LeveL: ${
-        selectedEvent[0].lightLevel
-      })\n\n${invite.url}`
+    //  interaction.channel.send(
+    //    `${role}\n\n**${displayName} is looking for ${
+    //      selectedEvent[0].size - interaction.options.data[0].value
+    //    } for ${selectedEvent[0].name}** (Light LeveL: ${
+    //      selectedEvent[0].lightLevel
+    //    })\n\n${invite.url}`
+    //  );
+
+    const embed = new MessageEmbed()
+      .setTitle('Looking for Group')
+      .setColor('#3BA55C')
+      .setDescription(
+        `${role}\n\n**${displayName} is looking for ${
+          selectedEvent[0].size - interaction.options.data[0].value
+        } for ${selectedEvent[0].name}**\n\nLight Level: ${
+          selectedEvent[0].lightLevel
+        }`
+      );
+
+    const row = new MessageActionRow().addComponents(
+      new MessageButton()
+        //   .setCustomId('invite')
+        .setLabel('Join Voice Channel')
+        .setStyle('LINK')
+        .setURL(invite.url)
     );
+    interaction.channel
+      .send({ embeds: [embed], components: [row] })
+      .then(async (res) => {
+        let messageId = res.id;
+
+        await interaction.channel.threads.create({
+          name: `${selectedEvent[0].name} with ${displayName}`,
+          autoArchiveDuraction: 300,
+          startMessage: messageId,
+        });
+      });
 
     interaction.reply({
       content: `You've created an LFG post!`,
