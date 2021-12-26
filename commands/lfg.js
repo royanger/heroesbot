@@ -145,8 +145,6 @@ module.exports = {
         await thread.members.add(userId);
       });
 
-    // I have a /command that creates a richembed, creates an action row and button and a thread for the message/richembed and sends that to the channel. That's working great. Can I have the user who executed the /slash command added to the thread as part of the command?
-
     // message user to confirm LFG was created
     interaction.reply({
       content: `You've created an LFG post!`,

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { guildId, botName } = require('../configs/bot.config.json');
+const { guildId } = require('../configs/bot.config.json');
 const logger = require('../libs/logger');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 
@@ -61,32 +61,52 @@ module.exports = {
       `${value}.json`
     ));
 
-    console.log(module.exports);
-    console.log(module.exports[value]);
+    //  console.log(module.exports);
+    console.log(module.exports[value].images);
 
-    console.log('name', interaction.options.data[0].name);
-    console.log('content', interaction.options.data[0].content);
+    // start building the embed
+    const embed = [];
 
-    // create rich embed
-    const file = new MessageAttachment('./images/lw-wish-wall-01.png');
-    const embed = new MessageEmbed()
-      .setTitle(module.exports[value].name)
-      .setColor('#3BA55C')
-      .setDescription(
-        `${module.exports[value].name}\n\n${module.exports[value].content}\n\n`
-      )
-      .setImage('attachment://lw-wish-wall-01.png');
-    // .setURL(invite.url);
+    // create first message
+    // TODO handle no image
+    embed.push(
+      new MessageEmbed()
+        .setTitle(module.exports[value].name)
+        .setColor('#3BA55C')
+        .setDescription(`${module.exports[value].content}\n\n`)
+        .setImage(`attachment://${module.exports[value].images[0]}`)
+    );
 
-    // create row and button for event link
-    // const row = new MessageActionRow().addComponents(
-    // new MessageButton()
-    //   .setLabel('Join Voice Channel')
-    //   .setStyle('LINK')
-    //   .setURL(invite.url)
-    // );
+    // add addition parts if there are 2+ images
+    if (module.exports[value].images.length > 1) {
+      module.exports[value].images.slice(1).map((item, index) => {
+        embed.push(
+          new MessageEmbed()
+            .setTitle(`${module.exports[value].name} - Part ${index + 2}`)
+            .setColor('#3BA55C')
+            .setDescription('Additional image for encounter')
+            .setImage(`attachment://${item}`)
+        );
+      });
+    }
 
-    interaction.channel.send({ embeds: [embed], files: [file] });
+    // handle images
+    if (module.exports[value].images.length > 0) {
+      // there is at least one image, so build array of images
+      let images = [];
+      module.exports[value].images.map((image) => {
+        images.push(new MessageAttachment(`./images/${image}`));
+      });
+      interaction.channel.send({
+        embeds: embed,
+        files: images,
+      });
+    } else {
+      // no images, so don't try and include theme
+      interaction.channel.send({
+        embeds: embed,
+      });
+    }
 
     // message user with commands
     interaction.reply({
