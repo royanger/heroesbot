@@ -3,6 +3,7 @@ const path = require('path');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { guildId, botName } = require('../configs/bot.config.json');
 const logger = require('../libs/logger');
+const { MessageEmbed, MessageAttachment } = require('discord.js');
 
 fs.readdirSync('./teach').forEach((dir) => {
   fs.readdirSync(`./teach/${dir}`).forEach((file) => {
@@ -49,11 +50,48 @@ module.exports = {
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
 
-    logger.info(`${Member.user.tag} used /hero`);
+    logger.info(`${Member.user.tag} used /encounter`);
+
+    let key = interaction.options.data[0].name;
+    let value = interaction.options.data[0].value;
+
+    module.exports[value] = require(path.join(
+      __dirname,
+      `../teach/${key}`,
+      `${value}.json`
+    ));
+
+    console.log(module.exports);
+    console.log(module.exports[value]);
+
+    console.log('name', interaction.options.data[0].name);
+    console.log('content', interaction.options.data[0].content);
+
+    // create rich embed
+    const file = new MessageAttachment('./images/lw-wish-wall-01.png');
+    const embed = new MessageEmbed()
+      .setTitle(module.exports[value].name)
+      .setColor('#3BA55C')
+      .setDescription(
+        `${module.exports[value].name}\n\n${module.exports[value].content}\n\n`
+      )
+      .setImage('attachment://lw-wish-wall-01.png');
+    // .setURL(invite.url);
+
+    // create row and button for event link
+    // const row = new MessageActionRow().addComponents(
+    // new MessageButton()
+    //   .setLabel('Join Voice Channel')
+    //   .setStyle('LINK')
+    //   .setURL(invite.url)
+    // );
+
+    interaction.channel.send({ embeds: [embed], files: [file] });
 
     // message user with commands
     interaction.reply({
-      content: `Teach something`,
+      content: `Encounter information posted to channel`,
+      // content: 'test',
       ephemeral: true,
     });
   },
