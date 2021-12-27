@@ -1,98 +1,110 @@
 [
   {
-    "name": "Vault of Glass",
-    "abbreviation": "vog",
+    "name": "vault_of_glass",
+    "description": "Vault of Glass - 6 person raid, 1300 LL",
     "size": 6,
     "lightLevel": "1300"
   },
   {
-    "name": "Master Vault of Glass",
-    "abbreviation": "mvog",
+    "name": "master_vault_of_glass",
+    "description": "Master Vault of Glass - 6 person raid, 1360 LL",
     "size": 6,
     "lightLevel": "1360"
   },
   {
-    "name": "Deep Stone Crypt",
-    "abbreviation": "dsc",
+    "name": "deep_stone_crypt",
+    "description": "Deep Stone Crypt - 6 person raid, 1220 LL",
     "size": 6,
     "lightLevel": "1220"
   },
   {
-    "name": "Garden of Salvation",
-    "abbreviation": "gos",
+    "name": "garden_of_salvation",
+    "description": "Garden of Salvation - 6 person raid, 1100 LL",
     "size": 6,
     "lightLevel": "1100"
   },
   {
-    "name": "Last Wish",
-    "abbreviation": "lw",
+    "name": "last_wish",
+    "description": "Last Wish - 6 person raid, 1100 LL",
     "size": 6,
     "lightLevel": "1100"
   },
   {
-    "name": "Grasp of Avarice",
-    "abbreviation": "ga",
+    "name": "grasp_of_avarice",
+    "description": "Grasp of Avarice - 3 person dungeon, 1310 LL",
     "size": "3",
     "lightLevel": "1310"
   },
   {
-    "name": "Master Grasp of Avarice",
-    "abbreviation": "mga",
+    "name": "master_grasp_of_avarice",
+    "description": "Master Grasp of Avarice - 3 person dungeon, 1360 LL",
     "size": "3",
     "lightLevel": "1360"
   },
   {
-    "name": "Prophecy",
-    "abbreviation": "ph",
+    "name": "prophecy",
+    "description": "Prophecy - 3 person dungeon, 1100 LL",
     "size": "3",
     "lightLevel": "1100"
   },
   {
-    "name": "Pit of Heresy",
-    "abbreviation": "poh",
+    "name": "pit_of_heresy",
+    "description": "Pit of Heresy - 3 person dungeon, 1100 LL",
     "size": "3",
     "lightLevel": "1100"
   },
   {
-    "name": "Shattered Throne",
-    "abbreviation": "sh",
+    "name": "shattered_throne",
+    "description": "Shattered Throne - 3 person dungeon, 1100 LL",
     "size": "3",
     "lightLevel": "1100"
   },
   {
-    "name": "Gambit",
-    "abbreviation": "gb",
+    "name": "gambit",
+    "description": "Gambit - 4 person pvpve activity, 1100 LL",
     "size": "4",
     "lightLevel": "1100"
   },
   {
-    "name": "Iron Banner",
-    "abbreviation": "ib",
+    "name": "iron_banner",
+    "description": "Iron Banner - 6 person pvp, 1320 LL",
     "size": "6",
     "lightLevel": "1320"
   },
   {
-    "name": "Trials of Osiris",
-    "abbreviation": "trials",
+    "name": "trials_of_osiris",
+    "description": "Trials of Osiris - 3 person pvp, 1330 LL",
     "size": "3",
     "lightLevel": "1330"
   },
   {
-    "name": "Competitive Crucible",
-    "abbreviation": "comp",
+    "name": "comp",
+    "description": "Competitive Crucible - 3 person pvp, 1100 LL",
     "size": "3",
     "lightLevel": "1100"
   },
   {
-    "name": "Casual PVP (6 Person)",
-    "abbreviation": "cas6",
+    "name": "casual_pvp_6",
+    "description": "Casual PVP - 6 person casual pvp, 1100 LL",
     "size": "6",
     "lightLevel": "1100"
   },
   {
-    "name": "Casual PVP (3 Person)",
-    "abbreviation": "cas3",
-    "size": "6",
+    "name": "casual_pvp_3",
+    "description": "Casual PVP - 3 person dungeon, 1100 LL",
+    "size": "2",
     "lightLevel": "1100"
+  },
+  {
+    "name": "nightfall",
+    "description": "Nightfall - 3 person pvp, 1310LL",
+    "size": 3,
+    "lightLevel": "1300"
+  },
+  {
+    "name": "master_nightfall",
+    "description": "Master Nightfall - 3 person pvp, 1350LL",
+    "size": 3,
+    "lightLevel": "1350"
   }
 ]
