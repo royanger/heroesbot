@@ -68,30 +68,33 @@ module.exports = {
     ));
 
     // confirm that the user can use command, or that bot is set to 'any'
-    //  console.log(Member.roles);
 
-    //  console.log(
-    //  if (
-    //    Member.roles.cache.map((userRole) => {
-    //      encounterAccess.filter((role) => {
-    //        return role === userRole;
-    //      });
-    //    })
-    //  ) {
-    //    console.log('true');
-    //  }
-    //  //  )
+    // if encounterAcccess in config is set to 'any' bypass these checks.
+    if (encounterAccess !== 'any') {
+      let memberRoles = Member.roles.cache.map((role) => {
+        return role.id;
+      });
 
-    if (
-      encounterAccess.map((role) => {
-        console.log(role);
-        Member.roles.cache.map((role) => {
-          console.log('staff role', role.id);
+      let results = [];
+      for (let i = 0; i < encounterAccess.length; i++) {
+        for (let j = 0; j < memberRoles.length; j++) {
+          if (memberRoles[j] === encounterAccess[i])
+            results.push(memberRoles[j]);
+        }
+      }
+
+      // if results > 0, user has at least one role from the list
+      // otherwise, error out and message user
+      if (results.length < 1) {
+        logger.info(
+          `${Member.user.tag} tried to use /encounter but does not have the access`
+        );
+        await interaction.reply({
+          content: `You can not use that command.`,
+          ephemeral: true,
         });
-        return Member.roles.cache.some((userRole) => userRole.id === role);
-      })
-    ) {
-      console.log('true');
+        return;
+      }
     }
 
     // confirm that bot can use 'any'', or user used correct channel
