@@ -96,15 +96,15 @@
     "lightLevel": "1100"
   },
   {
-    "name": "nightfall",
-    "description": "Nightfall - 3 person pvp, 1310LL",
-    "size": 3,
-    "lightLevel": "1300"
-  },
-  {
     "name": "master_nightfall",
     "description": "Master Nightfall - 3 person pvp, 1350LL",
     "size": 3,
     "lightLevel": "1350"
+  },
+  {
+    "name": "grandmaster_nightfall",
+    "description": "Grandmaster Nightfall - 3 person pvp, 1370LL",
+    "size": 3,
+    "lightLevel": "1370"
   }
 ]
