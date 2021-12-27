@@ -123,9 +123,6 @@ module.exports = {
       }
     }
 
-    //  console.log(module.exports);
-    //  console.log(module.exports[value].images);
-
     // start building the embed
     const embed = [];
 
@@ -135,7 +132,7 @@ module.exports = {
       .setColor('#3BA55C');
 
     if (module.exports[value].content) {
-      newEmbed.setDescription(`${module.exports[value].content}\n\n`);
+      newEmbed.setDescription(`${module.exports[value].content[0]}\n\n`);
     } else {
       newEmbed.setDescription('No written information. Please see image');
     }
@@ -146,19 +143,58 @@ module.exports = {
     }
     embed.push(newEmbed);
 
-    // add additional parts if there are 2+ images
+    // add additional parts if there are 2+ images or 2+ content sections
     if (
-      module.exports[value].images &&
-      module.exports[value].images.length > 1
+      (module.exports[value].images &&
+        module.exports[value].images.length > 1) ||
+      (module.exports[value].content &&
+        module.exports[value].content.length > 1)
     ) {
-      module.exports[value].images.slice(1).map((item, index) => {
-        embed.push(
-          new MessageEmbed()
-            .setTitle(`${module.exports[value].name} - Part ${index + 2}`)
-            .setColor('#3BA55C')
-            .setDescription('Additional image for encounter')
-            .setImage(`attachment://${item}`)
-        );
+      // get longest length of array from content or images
+      let length =
+        module.exports[value].images.length >
+        module.exports[value].content.length
+          ? module.exports[value].images.length
+          : module.exports[value].content.length;
+
+      // create .map equal to longest array length
+      let count = new Array(length - 1);
+      [...count].map((_, index) => {
+        // create the embed
+        let supplementalEmbed = new MessageEmbed()
+          .setTitle(`${module.exports[value].name} - Part ${index + 2}`)
+          .setColor('#3BA55C');
+
+        // if there is both content and an image for this pass, add both
+        if (
+          module.exports[value].images[index + 1] &&
+          module.exports[value].content[index + 1]
+        ) {
+          supplementalEmbed
+            .setDescription(`${module.exports[value].content[index + 1]}`)
+            .setImage(
+              `attachment://${module.exports[value].images[index + 1]}`
+            );
+        } else {
+          // if there is only an image or only content, handle that
+
+          // if there is content and no image, add content
+          if (module.exports[value].content[index + 1]) {
+            supplementalEmbed.setDescription(
+              `${module.exports[value].content[index + 1]}`
+            );
+          }
+
+          // if there is an image and no content, add image
+          if (module.exports[value].images[index + 1]) {
+            supplementalEmbed
+              .setDescription('Additional image for encounter')
+              .setImage(
+                `attachment://${module.exports[value].images[index + 1]}`
+              );
+          }
+        }
+        embed.push(supplementalEmbed);
       });
     }
 
