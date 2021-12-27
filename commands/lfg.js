@@ -17,7 +17,7 @@ let data = new SlashCommandBuilder()
 // iterate over the various event types and add subcommands for each
 events.map((event) => {
   data.addIntegerOption((optionType) =>
-    optionType.setName(event.abbreviation).setDescription(event.name)
+    optionType.setName(event.name).setDescription(event.description)
   );
 });
 
@@ -32,7 +32,7 @@ module.exports = {
 
     // grab info about the channel member is in and event
     let selectedEvent = events.filter((obj) => {
-      return obj.abbreviation === interaction.options.data[0].name;
+      return obj.name === interaction.options.data[0].name;
     });
     let partySize = selectedEvent[0].size;
 
@@ -109,6 +109,14 @@ module.exports = {
     let displayName =
       Member.nickname !== null ? Member.nickname : Member.user.username;
 
+    // format name - remove _ and capitalize
+    let formattedName = selectedEvent[0].name
+      .split('_')
+      .map((name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      })
+      .join(' ');
+
     // create rich embed
     const embed = new MessageEmbed()
       .setTitle('Looking for Group')
@@ -116,7 +124,7 @@ module.exports = {
       .setDescription(
         `${role}\n\n**${displayName} is looking for ${
           selectedEvent[0].size - interaction.options.data[0].value
-        } for ${selectedEvent[0].name}**\n\nLight Level: ${
+        } for ${formattedName}**\n\nLight Level: ${
           selectedEvent[0].lightLevel
         }\n\n`
       )
