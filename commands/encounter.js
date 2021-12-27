@@ -97,7 +97,31 @@ module.exports = {
       }
     }
 
-    // confirm that bot can use 'any'', or user used correct channel
+    // if encounterChannels in config is set to 'any' bypass these checks.
+    if (encounterChannels !== 'any') {
+      let results = [];
+      for (let i = 0; i < encounterChannels.length; i++) {
+        if (encounterChannels[i] === interaction.channelId)
+          results.push(encounterChannels[i]);
+      }
+
+      // if results > 0, user is in the correct text channel
+      // otherwise, error out and message user
+      if (results.length < 1) {
+        logger.info(
+          `${Member.user.tag} tried to use /encounter but was in the wrong channel`
+        );
+        await interaction.reply({
+          content: `You can not user /encounter in this channel. Correct channels: ${encounterChannels.map(
+            (channel) => {
+              return ` ${Guild.channels.cache.get(channel)}`;
+            }
+          )}`,
+          ephemeral: true,
+        });
+        return;
+      }
+    }
 
     //  console.log(module.exports);
     //  console.log(module.exports[value].images);
@@ -106,17 +130,27 @@ module.exports = {
     const embed = [];
 
     // create first message
-    // TODO handle no image
-    embed.push(
-      new MessageEmbed()
-        .setTitle(module.exports[value].name)
-        .setColor('#3BA55C')
-        .setDescription(`${module.exports[value].content}\n\n`)
-        .setImage(`attachment://${module.exports[value].images[0]}`)
-    );
+    let newEmbed = new MessageEmbed()
+      .setTitle(module.exports[value].name)
+      .setColor('#3BA55C');
 
-    // add addition parts if there are 2+ images
-    if (module.exports[value].images.length > 1) {
+    if (module.exports[value].content) {
+      newEmbed.setDescription(`${module.exports[value].content}\n\n`);
+    } else {
+      newEmbed.setDescription('No written information. Please see image');
+    }
+
+    // confirm that there is at least one image before trying to add it
+    if (module.exports[value].images) {
+      newEmbed.setImage(`attachment://${module.exports[value].images[0]}`);
+    }
+    embed.push(newEmbed);
+
+    // add additional parts if there are 2+ images
+    if (
+      module.exports[value].images &&
+      module.exports[value].images.length > 1
+    ) {
       module.exports[value].images.slice(1).map((item, index) => {
         embed.push(
           new MessageEmbed()
@@ -128,9 +162,9 @@ module.exports = {
       });
     }
 
-    // handle images
-    if (module.exports[value].images.length > 0) {
-      // there is at least one image, so build array of images
+    // handle images attaching images and then sending embed
+    if (module.exports[value].images) {
+      // there is at least one image, so build array of images and send
       let images = [];
       module.exports[value].images.map((image) => {
         images.push(new MessageAttachment(`./images/${image}`));
@@ -140,7 +174,7 @@ module.exports = {
         files: images,
       });
     } else {
-      // no images, so don't try and include theme
+      // no images, so don't try and include them and just send
       interaction.channel.send({
         embeds: embed,
       });
