@@ -17,9 +17,14 @@ let data = new SlashCommandBuilder()
 // iterate over the various event types and add subcommands for each
 events.map((event) => {
   data.addIntegerOption((optionType) =>
-    optionType.setName(event.abbreviation).setDescription(event.name)
+    optionType.setName(event.name).setDescription(event.description)
   );
 });
+data.addStringOption((option) =>
+  option
+    .setName('message')
+    .setDescription('An optional message to be included in the LFG post')
+);
 
 module.exports = {
   data,
@@ -32,9 +37,19 @@ module.exports = {
 
     // grab info about the channel member is in and event
     let selectedEvent = events.filter((obj) => {
-      return obj.abbreviation === interaction.options.data[0].name;
+      return obj.name === interaction.options.data[0].name;
     });
     let partySize = selectedEvent[0].size;
+
+    // grab the user supplied message, if there was one
+    let filteredMessage = interaction.options.data.filter((option) => {
+      return option.name === 'message';
+    });
+    // confirm that the user only submitted one message
+    let userMessage =
+      filteredMessage.length === 1 ? filteredMessage[0] : 'blank';
+
+    console.log('message', userMessage);
 
     // member is not in the correct text channel to use command
     if (interaction.channelId !== lfgChannel) {
@@ -109,6 +124,14 @@ module.exports = {
     let displayName =
       Member.nickname !== null ? Member.nickname : Member.user.username;
 
+    // format name - remove _ and capitalize
+    let formattedName = selectedEvent[0].name
+      .split('_')
+      .map((name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      })
+      .join(' ');
+
     // create rich embed
     const embed = new MessageEmbed()
       .setTitle('Looking for Group')
@@ -116,9 +139,9 @@ module.exports = {
       .setDescription(
         `${role}\n\n**${displayName} is looking for ${
           selectedEvent[0].size - interaction.options.data[0].value
-        } for ${selectedEvent[0].name}**\n\nLight Level: ${
-          selectedEvent[0].lightLevel
-        }\n\n`
+        } for ${formattedName}**\n\n${
+          userMessage !== 'blank' ? `${userMessage.value} \n\n` : ''
+        }Light Level: ${selectedEvent[0].lightLevel}\n\n`
       )
       .setURL(invite.url);
 
@@ -144,8 +167,6 @@ module.exports = {
         //if (thread.joinable)
         await thread.members.add(userId);
       });
-
-    // I have a /command that creates a richembed, creates an action row and button and a thread for the message/richembed and sends that to the channel. That's working great. Can I have the user who executed the /slash command added to the thread as part of the command?
 
     // message user to confirm LFG was created
     interaction.reply({
