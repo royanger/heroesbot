@@ -1,16 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { guildId } = require('../configs/bot.config.json');
+const {
+  guildId,
+  encounterAccess,
+  encounterChannels,
+} = require('../configs/bot.config.json');
 const logger = require('../libs/logger');
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 
-fs.readdirSync('./teach').forEach((dir) => {
-  fs.readdirSync(`./teach/${dir}`).forEach((file) => {
+fs.readdirSync('./encounters').forEach((dir) => {
+  fs.readdirSync(`./encounters/${dir}`).forEach((file) => {
     let fileName = file.split('.').slice(0, 1).join('');
     module.exports[fileName] = require(path.join(
       __dirname,
-      `../teach/${dir}`,
+      `../encounters/${dir}`,
       file
     ));
   });
@@ -19,9 +23,9 @@ fs.readdirSync('./teach').forEach((dir) => {
 let lessons = [];
 
 // create object of raids/events with array of encounters based on file system
-fs.readdirSync('./teach').forEach((dir) => {
+fs.readdirSync('./encounters').forEach((dir) => {
   let encounters = [];
-  fs.readdirSync(`./teach/${dir}`).forEach((file) => {
+  fs.readdirSync(`./encounters/${dir}`).forEach((file) => {
     encounters.push(file.split('.').slice(0, 1).join(''));
   });
   lessons[dir] = encounters;
@@ -49,6 +53,8 @@ module.exports = {
     let userId = interaction.user.id;
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
+    //  let channel = Member.voice.channel;
+    //  let role = Guild.roles.cache.get(lfgRole);
 
     logger.info(`${Member.user.tag} used /encounter`);
 
@@ -57,12 +63,41 @@ module.exports = {
 
     module.exports[value] = require(path.join(
       __dirname,
-      `../teach/${key}`,
+      `../encounters/${key}`,
       `${value}.json`
     ));
 
+    // confirm that the user can use command, or that bot is set to 'any'
+    //  console.log(Member.roles);
+
+    //  console.log(
+    //  if (
+    //    Member.roles.cache.map((userRole) => {
+    //      encounterAccess.filter((role) => {
+    //        return role === userRole;
+    //      });
+    //    })
+    //  ) {
+    //    console.log('true');
+    //  }
+    //  //  )
+
+    if (
+      encounterAccess.map((role) => {
+        console.log(role);
+        Member.roles.cache.map((role) => {
+          console.log('staff role', role.id);
+        });
+        return Member.roles.cache.some((userRole) => userRole.id === role);
+      })
+    ) {
+      console.log('true');
+    }
+
+    // confirm that bot can use 'any'', or user used correct channel
+
     //  console.log(module.exports);
-    console.log(module.exports[value].images);
+    //  console.log(module.exports[value].images);
 
     // start building the embed
     const embed = [];
