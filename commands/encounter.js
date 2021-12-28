@@ -151,11 +151,22 @@ module.exports = {
         module.exports[value].content.length > 1)
     ) {
       // get longest length of array from content or images
-      let length =
-        module.exports[value].images.length >
-        module.exports[value].content.length
-          ? module.exports[value].images.length
-          : module.exports[value].content.length;
+      let length;
+      if (module.exports[value].images && module.exports[value].content) {
+        length =
+          module.exports[value].images.length >
+          module.exports[value].content.length
+            ? module.exports[value].images.length
+            : module.exports[value].content.length;
+      }
+
+      if (module.exports[value].images && !module.exports[value].content) {
+        length = module.exports[value].images.length;
+      }
+
+      if (!module.exports[value].images && module.exports[value].content) {
+        length = module.exports[value].images.content;
+      }
 
       // create .map equal to longest array length
       let count = new Array(length - 1);
@@ -167,7 +178,9 @@ module.exports = {
 
         // if there is both content and an image for this pass, add both
         if (
+          module.exports[value].images &&
           module.exports[value].images[index + 1] &&
+          module.exports[value].content &&
           module.exports[value].content[index + 1]
         ) {
           supplementalEmbed
@@ -179,14 +192,20 @@ module.exports = {
           // if there is only an image or only content, handle that
 
           // if there is content and no image, add content
-          if (module.exports[value].content[index + 1]) {
+          if (
+            module.exports[value].content &&
+            module.exports[value].content[index + 1]
+          ) {
             supplementalEmbed.setDescription(
               `${module.exports[value].content[index + 1]}`
             );
           }
 
           // if there is an image and no content, add image
-          if (module.exports[value].images[index + 1]) {
+          if (
+            module.exports[value].images &&
+            module.exports[value].images[index + 1]
+          ) {
             supplementalEmbed
               .setDescription('Additional image for encounter')
               .setImage(

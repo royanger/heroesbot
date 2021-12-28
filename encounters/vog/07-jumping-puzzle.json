@@ -1,0 +1,7 @@
+{
+  "name": "The Jumping Puzzle",
+  "content": [
+    "There is a jumping puzzle after exiting the main maze.  It requires the fireteam to cross a series of platforms that disappear and reappear periodically, then jump across to the narrow ledge on the other side. Not every platform is needed; after the first few, all three classes should be able to launch the rest of the way across.\n\nAfter the jumping puzzle, just before reaching the gate that leads to the next encounter, head left of the gate entrance, climb up the dimly lit wall to find a chest."
+  ],
+  "images": ["vog-secret-chest-01.png"]
+}

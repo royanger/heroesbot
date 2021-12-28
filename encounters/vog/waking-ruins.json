@@ -1,7 +1,0 @@
-{
-  "name": "Waking the Ruins",
-  "content": [
-    "Mechanics: Vex Sync Plates\n\nSynopsis:\n• Capture three Vex Sync Plates.\n• Prevent the Vex from retaking the Vex Sync Plates.\n\nThe fireteam will spawn looking up at the door to the Vault of Glass in what used to be a public area on Venus, the Waking Ruins.  There is a Vex Sync Plate on the left, in front of the door, and on the right.  Send two players to capture each plate.\n\nBegin by standing in each plate to capture it; it’s not required to stay in the plates once captured. Meanwhile Vex will begin spawning. The smaller Goblin and Hobgoblin units cannot retake the plates, only the Praetorian Minotaurs.  Focus on killing these Praetorians before they reach the plates.  Their spawn will alternate between points on opposite sides of each plate.\n\nProgress can be tracked by looking back towards the spawn point at the Spire which will be forming inside a Vex latticework. The more physical it becomes, the closer the Vault is to opening.  If any of the plates are deactivated by Praetorians, the spire will rapidly disassemble.  When it’s fully built, the enemies will despawn, and a white laser will shoot from the Spire to open the door."
-  ],
-  "images": ["vog-waking-ruins-01.png"]
-}
