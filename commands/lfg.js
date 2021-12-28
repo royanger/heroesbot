@@ -20,6 +20,17 @@ events.map((event) => {
     optionType.setName(event.name).setDescription(event.description)
   );
 });
+
+// add 'string' option for freeform LFG entries
+data.addStringOption((option) =>
+  option
+    .setName('other')
+    .setDescription(
+      'Freeform activity entry. Please include details like Light Level'
+    )
+);
+
+// add 'string' option for optional message to be included in LFG post.
 data.addStringOption((option) =>
   option
     .setName('message')
@@ -42,6 +53,39 @@ module.exports = {
     // confirm that the user only submitted one message
     let userMessage =
       filteredMessage.length === 1 ? filteredMessage[0] : 'blank';
+
+    // set up message from user if other was chosen
+    let filteredOther = interaction.options.data.filter((option) => {
+      return option.name === 'other';
+    });
+    let otherMessage = filteredOther.length === 1 ? filteredOther[0] : 'blank';
+
+    console.log('filteredOther', filteredOther);
+    console.log('otherMessage', otherMessage);
+    console.log(
+      'interaction.options.data.length',
+      interaction.options.data.length
+    );
+
+    // check that the user entered a valid activity
+    if (interaction.options.data.length < 1) {
+      logger.info(`${Member.user.tag} did not enter any options`);
+      await interaction.reply({
+        content: `You must enter a valid option.`,
+        ephemeral: true,
+      });
+      return;
+    }
+
+    // get nickname if present, otherwise fall back to username
+    let displayName =
+      Member.nickname !== null ? Member.nickname : Member.user.username;
+
+    // grab info about the channel member is in and event
+    let selectedEvent = events.filter((obj) => {
+      return obj.name === interaction.options.data[0].name;
+    });
+    let partySize = otherMessage === 'blank' ? selectedEvent[0].size : 9;
 
     // member is not in the correct text channel to use command
     if (interaction.channelId !== lfgChannel) {
@@ -82,11 +126,53 @@ module.exports = {
       return;
     }
 
-    // check that the user entered a valid activity
-    if (interaction.options.data.length < 1) {
-      logger.info(`${Member.user.tag} did not enter any options`);
+    // if user choose 'other' then use that to create LFG post
+    if (interaction.options.data.length === 1 && otherMessage !== 'blank') {
+      console.log('readhing here?');
+      let invite = await channel.createInvite({
+        maxAge: 1200,
+        maxUses: 20,
+        reason: 'LFG Invite',
+      });
+
+      // change voice channel size to match event party size
+      channel.setUserLimit(9);
+      logger.info(`Changed ${channel.name} to size of ${partySize}`);
+
+      // create rich embed
+      const embed = new MessageEmbed()
+        .setTitle('Looking for Group')
+        .setColor('#3BA55C')
+        .setDescription(
+          `${role}\n\n**${displayName} is looking for players for the following activity:**\n\n${otherMessage.value}\n\n`
+        )
+        .setURL(invite.url);
+
+      // create row and button for event link
+      const row = new MessageActionRow().addComponents(
+        new MessageButton()
+          .setLabel('Join Voice Channel')
+          .setStyle('LINK')
+          .setURL(invite.url)
+      );
+
+      // send the message, get the id and create thread
+      interaction.channel
+        .send({ embeds: [embed], components: [row] })
+        .then(async (res) => {
+          let messageId = res.id;
+
+          let thread = await interaction.channel.threads.create({
+            name: `Activity with ${displayName}`,
+            autoArchiveDuration: 60,
+            startMessage: messageId,
+          });
+          //if (thread.joinable)
+          await thread.members.add(userId);
+        });
+
       await interaction.reply({
-        content: `You must enter a valid option.`,
+        content: `You only entered an 'other' option.`,
         ephemeral: true,
       });
       return;
@@ -101,12 +187,6 @@ module.exports = {
       });
       return;
     }
-
-    // grab info about the channel member is in and event
-    let selectedEvent = events.filter((obj) => {
-      return obj.name === interaction.options.data[0].name;
-    });
-    let partySize = selectedEvent[0].size;
 
     // check that the member supplied a current party size that is
     // smaller than the event party size.
@@ -137,10 +217,6 @@ module.exports = {
     // change voice channel size to match event party size
     channel.setUserLimit(partySize);
     logger.info(`Changed ${channel.name} to size of ${partySize}`);
-
-    // get nickname if present, otherwise fall back to username
-    let displayName =
-      Member.nickname !== null ? Member.nickname : Member.user.username;
 
     // format name - remove _ and capitalize
     let formattedName = selectedEvent[0].name
