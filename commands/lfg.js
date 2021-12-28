@@ -35,12 +35,6 @@ module.exports = {
     let channel = Member.voice.channel;
     let role = Guild.roles.cache.get(lfgRole);
 
-    // grab info about the channel member is in and event
-    let selectedEvent = events.filter((obj) => {
-      return obj.name === interaction.options.data[0].name;
-    });
-    let partySize = selectedEvent[0].size;
-
     // grab the user supplied message, if there was one
     let filteredMessage = interaction.options.data.filter((option) => {
       return option.name === 'message';
@@ -48,8 +42,6 @@ module.exports = {
     // confirm that the user only submitted one message
     let userMessage =
       filteredMessage.length === 1 ? filteredMessage[0] : 'blank';
-
-    console.log('message', userMessage);
 
     // member is not in the correct text channel to use command
     if (interaction.channelId !== lfgChannel) {
@@ -89,6 +81,32 @@ module.exports = {
       });
       return;
     }
+
+    // check that the user entered a valid activity
+    if (interaction.options.data.length < 1) {
+      logger.info(`${Member.user.tag} did not enter any options`);
+      await interaction.reply({
+        content: `You must enter a valid option.`,
+        ephemeral: true,
+      });
+      return;
+    }
+
+    // check that the option was not just the message
+    if (interaction.options.data[0].name === 'message') {
+      logger.info(`${Member.user.tag} entered only a 'message' option`);
+      await interaction.reply({
+        content: `You cam not enter only a message option. Please select an activity first.`,
+        ephemeral: true,
+      });
+      return;
+    }
+
+    // grab info about the channel member is in and event
+    let selectedEvent = events.filter((obj) => {
+      return obj.name === interaction.options.data[0].name;
+    });
+    let partySize = selectedEvent[0].size;
 
     // check that the member supplied a current party size that is
     // smaller than the event party size.
