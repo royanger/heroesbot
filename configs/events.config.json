@@ -91,19 +91,19 @@
   },
   {
     "name": "casual_pvp_3",
-    "description": "Casual PVP - 3 person dungeon, 1100 LL",
-    "size": "2",
+    "description": "Casual PVP - 3 person casual pvp, 1100 LL",
+    "size": 3,
     "lightLevel": "1100"
   },
   {
     "name": "master_nightfall",
-    "description": "Master Nightfall - 3 person pvp, 1350LL",
+    "description": "Master Nightfall - 3 person strike, 1350LL",
     "size": 3,
     "lightLevel": "1350"
   },
   {
     "name": "grandmaster_nightfall",
-    "description": "Grandmaster Nightfall - 3 person pvp, 1370LL",
+    "description": "Grandmaster Nightfall - 3 person strike, 1370LL",
     "size": 3,
     "lightLevel": "1345"
   }
