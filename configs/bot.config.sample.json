@@ -9,5 +9,5 @@
   "voiceChannelPrefix": "prefix of the voice channels. You could do 'Fireteam 1/2/3' or 'LFG 1/2/3'",
   "lfgRole": "ID of the role that will get pinged by the post. This should probably be the clan role or a specific 'LFG' role.",
   "encounterAccess": "An array of the roles that can use the command, or the word 'any' if everyone can use it.",
-  "encounterChannels": "An array of channels that the command can be used in, or the work 'any' if it can work in all channels"
+  "encounterChannels": "An array of channels that the command can be used in, or the work 'any' if it can work in all channels. Users without the role but in a channel listed here can use the command."
 }

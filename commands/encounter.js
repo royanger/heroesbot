@@ -70,7 +70,7 @@ module.exports = {
     // confirm that the user can use command, or that bot is set to 'any'
 
     // if encounterAcccess in config is set to 'any' bypass these checks.
-    if (encounterAccess !== 'any') {
+    if (encounterAccess !== 'any' && encounterChannels !== 'any') {
       let memberRoles = Member.roles.cache.map((role) => {
         return role.id;
       });
@@ -84,42 +84,30 @@ module.exports = {
       }
 
       // if results > 0, user has at least one role from the list
-      // otherwise, error out and message user
+      // otherwise,check if they have permission to post in channel
       if (results.length < 1) {
-        logger.info(
-          `${Member.user.tag} tried to use /encounter but does not have the access`
-        );
-        await interaction.reply({
-          content: `You can not use that command.`,
-          ephemeral: true,
-        });
-        return;
-      }
-    }
+        let resultsChannels = [];
+        for (let i = 0; i < encounterChannels.length; i++) {
+          if (encounterChannels[i] === interaction.channelId)
+            resultsChannels.push(encounterChannels[i]);
+        }
 
-    // if encounterChannels in config is set to 'any' bypass these checks.
-    if (encounterChannels !== 'any') {
-      let results = [];
-      for (let i = 0; i < encounterChannels.length; i++) {
-        if (encounterChannels[i] === interaction.channelId)
-          results.push(encounterChannels[i]);
-      }
-
-      // if results > 0, user is in the correct text channel
-      // otherwise, error out and message user
-      if (results.length < 1) {
-        logger.info(
-          `${Member.user.tag} tried to use /encounter but was in the wrong channel`
-        );
-        await interaction.reply({
-          content: `You can not user /encounter in this channel. Correct channels: ${encounterChannels.map(
-            (channel) => {
-              return ` ${Guild.channels.cache.get(channel)}`;
-            }
-          )}`,
-          ephemeral: true,
-        });
-        return;
+        // if resultsChannels > 0, user is in the correct text channel
+        // otherwise, error out and message user
+        if (resultsChannels.length < 1) {
+          logger.info(
+            `${Member.user.tag} tried to use /encounter but was in the wrong channel or does not have the role`
+          );
+          await interaction.reply({
+            content: `You can not user /encounter in this channel or you do not have permission to use the command. Correct channels: ${encounterChannels.map(
+              (channel) => {
+                return ` ${Guild.channels.cache.get(channel)}`;
+              }
+            )}`,
+            ephemeral: true,
+          });
+          return;
+        }
       }
     }
 
