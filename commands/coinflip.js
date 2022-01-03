@@ -1,10 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const {
-  MessageEmbed,
-  MessageActionRow,
-  MessageButton,
-  MessageAttachment,
-} = require('discord.js');
+const { MessageEmbed, MessageAttachment } = require('discord.js');
 const logger = require('../libs/logger');
 const { guildId } = require('../configs/bot.config.json');
 
