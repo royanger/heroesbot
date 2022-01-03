@@ -267,5 +267,6 @@ module.exports = {
       content: `You've created an LFG post!`,
       ephemeral: true,
     });
+    logger.info(`${Member.user.tag} posted an LFG successfully`);
   },
 };
