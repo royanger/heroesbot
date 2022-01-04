@@ -4,11 +4,39 @@
     "type": "COMPETING"
   },
   {
+    "name": "Sparrow Racing League",
+    "type": "COMPETING"
+  },
+  {
+    "name": "Xur's Game Show",
+    "type": "COMPETING"
+  },
+  {
     "name": "Shaxx Sing",
     "type": "LISTENING"
   },
   {
+    "name": "Eris' conspiracy theories",
+    "type": "LISTENING"
+  },
+  {
+    "name": "Riven's Whispers",
+    "type": "LISTENING"
+  },
+  {
     "name": "Crucible",
+    "type": "WATCHING"
+  },
+  {
+    "name": "the King of the Kill",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Datto videos",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Guardians yeeting off the tower",
     "type": "WATCHING"
   }
 ]
