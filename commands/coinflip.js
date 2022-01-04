@@ -3,7 +3,7 @@ const { MessageEmbed, MessageAttachment } = require('discord.js');
 const logger = require('../libs/logger');
 const { guildId } = require('../configs/bot.config.json');
 
-// add /lfg command
+// add /coinflip command
 let data = new SlashCommandBuilder()
   .setName('coinflip')
   .setDescription(

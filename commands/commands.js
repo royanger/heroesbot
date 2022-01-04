@@ -18,8 +18,11 @@ module.exports = {
 
     let message = `Available commands
 
-/commands - All bot commands
-/lfg <type>: <party> - Post lfg. Type selected from list`;
+**/commands** - All bot commands
+**/lfg <type>: <party>** - Post lfg. Type selected from list
+**/encounter <raid> <encounter>** - Get instructions and images for an encounter. Players can only use the #encounters channel.
+**/coinflip** - Roll for heads or tails
+**/silliness** - Bored? Tempt fate`;
 
     // message user with commands
     interaction.reply({

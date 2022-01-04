@@ -1,13 +1,14 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageAttachment } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const logger = require('../libs/logger');
 const { guildId } = require('../configs/bot.config.json');
+const silliness = require('../configs/silliness.config.json');
 
-// add /lfg command
+// add /silliness command
 let data = new SlashCommandBuilder()
   .setName('silliness')
   .setDescription(
-    'Flip a coin. Will it be heads or tails? (Or something else?)'
+    "Roll for a random way to complete a dungeon, strike, raid or whatever you're up to."
   );
 
 module.exports = {
@@ -17,42 +18,29 @@ module.exports = {
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
 
-    const roll = Math.ceil(Math.random() * 100);
+    const selection = Math.ceil(Math.random() * silliness.length) - 1;
+    const actionSelection =
+      Math.ceil(Math.random() * silliness[selection].options.length) - 1;
 
-    let results;
-    let image;
-    let easterEgg = false;
-    if (roll === 25 || roll === 75) {
-      results = 'an easter egg!';
-      image = 'magic.gif';
-      easterEgg = true;
-    } else if (roll < 51) {
-      results = 'heads';
-      image = 'coin-heads.png';
-    } else {
-      results = 'tails';
-      image = 'coin-tails.png';
-    }
-    let message = `**${Member.user.tag}** flipped a coin and the result was **${results}**\n\n`;
+    console.log('action selections', actionSelection);
+
+    let message = `${Member.user.tag} rolled the magic Destiny hopper.\n\n**Result**: ${silliness[selection].action} ${silliness[selection].options[actionSelection]}`;
 
     // create rich embed
     const embed = new MessageEmbed()
       .setTitle('Coin Flip!')
       .setColor('#3BA55C')
-      .setDescription('a silly command');
-    // .setImage(`attachment://${image}`);
-
-    //  const imageArray = new MessageAttachment(`./images/${image}`);
-
-    //  interaction.channel.send({ embeds: [embed], files: [imageArray] });
+      .setDescription(message);
 
     interaction.channel.send({ embeds: [embed] });
-    // message user to confirm LFG was created
+    // message user to confirm command was executed
     interaction.reply({
-      content: `You want some silliness`,
+      content: 'You flirted with destiny. Hopefully you have a little fun',
       ephemeral: true,
     });
 
-    logger.info(`${Member.user.tag} flipped a coin`);
+    logger.info(
+      `${Member.user.tag} tempted destiny and rolled for some silliness`
+    );
   },
 };
