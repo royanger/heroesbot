@@ -1,0 +1,39 @@
+[
+  {
+    "action": "You can only kill yellow and orange bars",
+    "options": [
+      "using grenades",
+      "with Rat King",
+      "using Skyburner's Oath",
+      "using your melee"
+    ]
+  },
+  {
+    "action": "Only one team member can shoot at a time while the others",
+    "options": [
+      "can throw grenades, get a kill and then tag in",
+      "must body block but not use any abilities, get hurt and then tag in",
+      "have to kill an enemy with their melee and then tag in"
+    ]
+  },
+  {
+    "action": "Run the entire encounter using only",
+    "options": [
+      "Rat King",
+      "Merciless and melees",
+      "Trinity Ghoul",
+      "Graviton Lance",
+      "Trace Rifles and grenades",
+      "Swords and melees"
+    ]
+  },
+  {
+    "action": "Death from above. Only kill while in the air, using your abilities and",
+    "options": [
+      "sidearms",
+      "sniper rifles",
+      "breach loaded grenade launchers",
+      "Jotunn, Fourth Horsemen, Arbalest, and Sunshot"
+    ]
+  }
+]
