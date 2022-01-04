@@ -18,17 +18,21 @@ module.exports = {
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
 
+    // get nickname if present, otherwise fall back to username
+    let displayName =
+      Member.nickname !== null ? Member.nickname : Member.user.username;
+
     const selection = Math.ceil(Math.random() * silliness.length) - 1;
     const actionSelection =
       Math.ceil(Math.random() * silliness[selection].options.length) - 1;
 
     console.log('action selections', actionSelection);
 
-    let message = `${Member.user.tag} rolled the magic Destiny hopper.\n\n**Result**: ${silliness[selection].action} ${silliness[selection].options[actionSelection]}`;
+    let message = `${displayName} rolled the magic Destiny hopper.\n\n**Result**: ${silliness[selection].action} ${silliness[selection].options[actionSelection]}`;
 
     // create rich embed
     const embed = new MessageEmbed()
-      .setTitle('Coin Flip!')
+      .setTitle('Tempting Fate!')
       .setColor('#3BA55C')
       .setDescription(message);
 
@@ -39,8 +43,6 @@ module.exports = {
       ephemeral: true,
     });
 
-    logger.info(
-      `${Member.user.tag} tempted destiny and rolled for some silliness`
-    );
+    logger.info(`${displayName} tempted destiny and rolled for some silliness`);
   },
 };

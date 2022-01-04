@@ -17,6 +17,10 @@ module.exports = {
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
 
+    // get nickname if present, otherwise fall back to username
+    let displayName =
+      Member.nickname !== null ? Member.nickname : Member.user.username;
+
     const roll = Math.ceil(Math.random() * 100);
 
     let results;
@@ -33,31 +37,31 @@ module.exports = {
       results = 'tails';
       image = 'coin-tails.jpg';
     }
-    let message = `**${Member.user.tag}** flipped a coin and the result was **${results}**\n\n`;
+    let message = `**${displayName}** flipped a coin and the result was **${results}**\n\n`;
 
     const easterEggs = [
       {
-        description: `**${Member.user.tag}** flipped a coin and and found **Dinklebot!**\n\n`,
+        description: `**${displayName}** flipped a coin and and found **Dinklebot!**\n\n`,
         image: 'coinflip-easteregg-dinklebot.jpg',
       },
       {
-        description: `**${Member.user.tag}** found the 15th Wish! \n\n`,
+        description: `**${displayName}** found the 15th Wish! \n\n`,
         image: 'coinflip-easteregg-15thwish.jpg',
       },
       {
-        description: `**${Member.user.tag}** loves using The Last Word on bosses!\n\n`,
+        description: `**${displayName}** loves using The Last Word on bosses!\n\n`,
         image: 'coinflip-easteregg-lastword.jpg',
       },
       {
-        description: `**${Member.user.tag}** loves Polaris Lance! Always equipped!\n\n`,
+        description: `**${displayName}** loves Polaris Lance! Always equipped!\n\n`,
         image: 'coinflip-easteregg-polarislance.jpg',
       },
       {
-        description: `**${Member.user.tag}** found the vault where Bungie keeps the bug free Telesto\n\n`,
+        description: `**${displayName}** found the vault where Bungie keeps the bug free Telesto\n\n`,
         image: 'coinflip-easteregg-telesto.jpg',
       },
       {
-        description: `**${Member.user.tag}** found a leak. Look at what's coming to Destiny!\n\n`,
+        description: `**${displayName}** found a leak. Look at what's coming to Destiny!\n\n`,
         image: 'coinflip-easteregg-touchofmalice.jpg',
       },
     ];
@@ -85,6 +89,6 @@ module.exports = {
       ephemeral: true,
     });
 
-    logger.info(`${Member.user.tag} flipped a coin`);
+    logger.info(`${displayName} flipped a coin`);
   },
 };

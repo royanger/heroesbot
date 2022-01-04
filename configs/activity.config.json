@@ -8,6 +8,22 @@
     "type": "COMPETING"
   },
   {
+    "name": "Crimson Duos",
+    "type": "COMPETING"
+  },
+  {
+    "name": "a Crayon Eating Contest",
+    "type": "COMPETING"
+  },
+  {
+    "name": "Challenge of the Elders",
+    "type": "COMPETING"
+  },
+  {
+    "name": "a Fashion Show",
+    "type": "COMPETING"
+  },
+  {
     "name": "Xur's Game Show",
     "type": "COMPETING"
   },
@@ -21,6 +37,30 @@
   },
   {
     "name": "Riven's Whispers",
+    "type": "LISTENING"
+  },
+  {
+    "name": "Drifter Dinging",
+    "type": "LISTENING"
+  },
+  {
+    "name": "Zoibs Ranting",
+    "type": "LISTENING"
+  },
+  {
+    "name": "Savathûn's Song",
+    "type": "LISTENING"
+  },
+  {
+    "name": "why She didn't have time to explain",
+    "type": "LISTENING"
+  },
+  {
+    "name": "a Paul Tassi podcast!",
+    "type": "LISTENING"
+  },
+  {
+    "name": "[Insect-Like Chittering]",
     "type": "LISTENING"
   },
   {
@@ -38,5 +78,57 @@
   {
     "name": "Guardians yeeting off the tower",
     "type": "WATCHING"
+  },
+  {
+    "name": "the Live Action Dance Trailer",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Unskippable Cut-Scenes",
+    "type": "WATCHING"
+  },
+  {
+    "name": "ballet with Rasputin",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Cayde's final moments",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Taeko-3 fail a strike with 9 guardians",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Hashladûn's linage fall",
+    "type": "WATCHING"
+  },
+  {
+    "name": "an Empty Tank Dance Party",
+    "type": "WATCHING"
+  },
+  {
+    "name": "Destiny 3 Beta",
+    "type": "PLAYING"
+  },
+  {
+    "name": "the Moon Tire Game",
+    "type": "PLAYING"
+  },
+  {
+    "name": "The Floor is Lava",
+    "type": "PLAYING"
+  },
+  {
+    "name": "Hide and Seek in the Tower",
+    "type": "PLAYING"
+  },
+  {
+    "name": "Garden of Salvation with Shadowprice",
+    "type": "PLAYING"
+  },
+  {
+    "name": "Queenswalk, still",
+    "type": "PLAYING"
   }
 ]
