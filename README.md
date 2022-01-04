@@ -4,11 +4,13 @@ This is a bot designed for the Helpless Heroes clan discord.
 
 ## Commands
 
-| Command      | Required Options                | Optional             | Results                                                      |
-| ------------ | ------------------------------- | -------------------- | ------------------------------------------------------------ |
-| `/commands`  |                                 |                      | List of all commands                                         |
-| `/lfg`       | `<event>: <current party size>` | `message: <message>` | Create an LFG post.                                          |
-| `/encounter` | `<activity>: <encounter>`       |                      | Create a message with details and images about the encounter |
+| Command      | Required Options                | Optional             | Results                                                       |
+| ------------ | ------------------------------- | -------------------- | ------------------------------------------------------------- |
+| `/commands`  |                                 |                      | List of all commands                                          |
+| `/lfg`       | `<event>: <current party size>` | `message: <message>` | Create an LFG post.                                           |
+| `/encounter` | `<activity>: <encounter>`       |                      | Create a message with details and images about the encounter. |
+| `/coinflip`  |                                 |                      | Random coin flip. Chance of easter egg.                       |
+| `/silliness` |                                 |                      | Want to spice up your encounters? Tempt fate.                 |
 
 ## Configuring the Bot
 
@@ -116,6 +118,26 @@ Both content and images are optional. If you create a file with no content secti
 **Limitations**
 
 The content sections have some size limitations. Each content block in the array must be 4096 characters long or smaller. Total character length of all content sections must be under 6000 characters.
+
+### Silliness **_or_** Tempt the Fates
+
+Configure the `/silliness` command to pop out some random ways to complete encounters to provide a challenge or spice things up.
+
+```js
+[
+  {
+    action: 'You can only kill yellow and orange bars',
+    options: [
+      'using grenades',
+      'with Rat King',
+      "using Skyburner's Oath",
+      'using your melee',
+    ],
+  },
+];
+```
+
+Repeat the above array as a many times as you want. Each entry needs 1 action and 2+ options. The action and options should form a complete sentence.
 
 ## Running the Bot
 

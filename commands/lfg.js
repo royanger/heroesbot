@@ -60,13 +60,6 @@ module.exports = {
     });
     let otherMessage = filteredOther.length === 1 ? filteredOther[0] : 'blank';
 
-    console.log('filteredOther', filteredOther);
-    console.log('otherMessage', otherMessage);
-    console.log(
-      'interaction.options.data.length',
-      interaction.options.data.length
-    );
-
     // check that the user entered a valid activity
     if (interaction.options.data.length < 1) {
       logger.info(`${Member.user.tag} did not enter any options`);
