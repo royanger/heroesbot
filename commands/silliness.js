@@ -28,7 +28,7 @@ module.exports = {
 
     // create rich embed
     const embed = new MessageEmbed()
-      .setTitle('Coin Flip!')
+      .setTitle('Tempting Fate!')
       .setColor('#3BA55C')
       .setDescription(message);
 
