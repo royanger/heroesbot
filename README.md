@@ -10,7 +10,7 @@ This is a bot designed for the Helpless Heroes clan discord.
 | `/lfg`       | `<event>: <current party size>` | `message: <message>` | Create an LFG post.                                           |
 | `/encounter` | `<activity>: <encounter>`       |                      | Create a message with details and images about the encounter. |
 | `/coinflip`  |                                 |                      | Random coin flip. Chance of easter egg.                       |
-| `/silliness  |                                 |                      | Want to spice up your encounters? Tempt fate.                 |
+| `/silliness` |                                 |                      | Want to spice up your encounters? Tempt fate.                 |
 
 ## Configuring the Bot
 
