@@ -28,10 +28,10 @@ module.exports = {
       easterEgg = true;
     } else if (roll < 51) {
       results = 'heads';
-      image = 'coin-heads.png';
+      image = 'coin-heads.jpg';
     } else {
       results = 'tails';
-      image = 'coin-tails.png';
+      image = 'coin-tails.jpg';
     }
     let message = `**${Member.user.tag}** flipped a coin and the result was **${results}**\n\n`;
 
