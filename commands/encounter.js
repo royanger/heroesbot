@@ -53,10 +53,12 @@ module.exports = {
     let userId = interaction.user.id;
     let Guild = client.guilds.cache.get(guildId);
     let Member = Guild.members.cache.get(userId);
-    //  let channel = Member.voice.channel;
-    //  let role = Guild.roles.cache.get(lfgRole);
 
-    logger.info(`${Member.user.tag} used /encounter`);
+    // get nickname if present, otherwise fall back to username
+    let displayName =
+      Member.nickname !== null ? Member.nickname : Member.user.username;
+
+    logger.info(`${displayName} used /encounter`);
 
     let key = interaction.options.data[0].name;
     let value = interaction.options.data[0].value;
@@ -96,7 +98,7 @@ module.exports = {
         // otherwise, error out and message user
         if (resultsChannels.length < 1) {
           logger.info(
-            `${Member.user.tag} tried to use /encounter but was in the wrong channel or does not have the role`
+            `${displayName} tried to use /encounter but was in the wrong channel or does not have the role`
           );
           await interaction.reply({
             content: `You can not user /encounter in this channel or you do not have permission to use the command. Correct channels: ${encounterChannels.map(
@@ -161,6 +163,7 @@ module.exports = {
       [...count].map((_, index) => {
         // create the embed
         let supplementalEmbed = new MessageEmbed()
+          .setAuthor(displayName)
           .setTitle(`${module.exports[value].name} - Part ${index + 2}`)
           .setColor('#3BA55C');
 
@@ -222,6 +225,8 @@ module.exports = {
         embeds: embed,
       });
     }
+
+    logger.info(`${displayName} sent an /encounter message`);
 
     // message user with commands
     interaction.reply({
