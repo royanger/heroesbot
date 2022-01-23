@@ -253,6 +253,7 @@ module.exports = {
         });
         //if (thread.joinable)
         await thread.members.add(userId);
+        await thread.send(`Who from ${role} wants to join?\n\n${invite.url}`);
       });
 
     // message user to confirm LFG was created
