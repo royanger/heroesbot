@@ -1,110 +1,140 @@
 [
   {
-    "name": "vault_of_glass",
-    "description": "Vault of Glass - 6 person raid, 1300 LL",
+    "name": "vow_of_the_disciple",
+    "description": "Vow of the Disciple, 1540 LL",
     "size": 6,
-    "lightLevel": "1300"
+    "lightLevel": "1540"
+  },
+  {
+    "name": "master_vow_of_the_disciple",
+    "description": "Master Vow of the Disciple, 1590 LL",
+    "size": 6,
+    "lightLevel": "1590"
+  },
+  {
+    "name": "vault_of_glass",
+    "description": "Vault of Glass - 6 person raid, 1350 LL",
+    "size": 6,
+    "lightLevel": "1350"
   },
   {
     "name": "master_vault_of_glass",
-    "description": "Master Vault of Glass - 6 person raid, 1360 LL",
+    "description": "Master Vault of Glass - 6 person raid, 1590 LL",
     "size": 6,
-    "lightLevel": "1360"
+    "lightLevel": "1590"
   },
   {
     "name": "deep_stone_crypt",
-    "description": "Deep Stone Crypt - 6 person raid, 1220 LL",
+    "description": "Deep Stone Crypt - 6 person raid, 1350 LL",
     "size": 6,
-    "lightLevel": "1220"
+    "lightLevel": "1350"
   },
   {
     "name": "garden_of_salvation",
-    "description": "Garden of Salvation - 6 person raid, 1100 LL",
+    "description": "Garden of Salvation - 6 person raid, 1350 LL",
     "size": 6,
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "last_wish",
-    "description": "Last Wish - 6 person raid, 1100 LL",
+    "description": "Last Wish - 6 person raid, 1350 LL",
     "size": 6,
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "grasp_of_avarice",
-    "description": "Grasp of Avarice - 3 person dungeon, 1310 LL",
+    "description": "Grasp of Avarice - 3 person dungeon, 1350 LL",
     "size": "3",
-    "lightLevel": "1310"
+    "lightLevel": "1350"
   },
   {
     "name": "master_grasp_of_avarice",
-    "description": "Master Grasp of Avarice - 3 person dungeon, 1360 LL",
+    "description": "Master Grasp of Avarice - 3 person dungeon, 1590 LL",
     "size": "3",
-    "lightLevel": "1360"
+    "lightLevel": "1590"
   },
   {
     "name": "prophecy",
-    "description": "Prophecy - 3 person dungeon, 1100 LL",
+    "description": "Prophecy - 3 person dungeon, 1350 LL",
     "size": "3",
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "pit_of_heresy",
-    "description": "Pit of Heresy - 3 person dungeon, 1100 LL",
+    "description": "Pit of Heresy - 3 person dungeon, 1350 LL",
     "size": "3",
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "shattered_throne",
-    "description": "Shattered Throne - 3 person dungeon, 1100 LL",
+    "description": "Shattered Throne - 3 person dungeon, 1350 LL",
     "size": "3",
-    "lightLevel": "1100"
+    "lightLevel": "1350"
+  },
+  {
+    "name": "master_wellspring",
+    "description": "Master Wellspring, 1580 LL",
+    "size": 6,
+    "lightLevel": "1580"
+  },
+  {
+    "name": "legend_dares_of_eternity",
+    "description": "Legend Dares of Eternity, 1550 LL",
+    "size": 6,
+    "lightLevel": "1550"
   },
   {
     "name": "gambit",
-    "description": "Gambit - 4 person pvpve activity, 1100 LL",
+    "description": "Gambit - 4 person pvpve activity, 1350 LL",
     "size": "4",
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "iron_banner",
-    "description": "Iron Banner - 6 person pvp, 1320 LL",
+    "description": "Iron Banner - 6 person pvp, 1350 LL",
     "size": "6",
-    "lightLevel": "1320"
+    "lightLevel": "1350"
   },
   {
     "name": "trials_of_osiris",
-    "description": "Trials of Osiris - 3 person pvp, 1330 LL",
+    "description": "Trials of Osiris - 3 person pvp, 1350 LL",
     "size": "3",
-    "lightLevel": "1330"
+    "lightLevel": "1350"
   },
   {
     "name": "comp",
-    "description": "Competitive Crucible - 3 person pvp, 1100 LL",
+    "description": "Competitive Crucible - 3 person pvp, 1350 LL",
     "size": "3",
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "casual_pvp_6",
-    "description": "Casual PVP - 6 person casual pvp, 1100 LL",
+    "description": "Casual PVP - 6 person casual pvp, 1350 LL",
     "size": "6",
-    "lightLevel": "1100"
+    "lightLevel": "1350"
   },
   {
     "name": "casual_pvp_3",
-    "description": "Casual PVP - 3 person casual pvp, 1100 LL",
-    "size": 3,
-    "lightLevel": "1100"
-  },
-  {
-    "name": "master_nightfall",
-    "description": "Master Nightfall - 3 person strike, 1350LL",
+    "description": "Casual PVP - 3 person casual pvp, 1350 LL",
     "size": 3,
     "lightLevel": "1350"
   },
   {
-    "name": "grandmaster_nightfall",
-    "description": "Grandmaster Nightfall - 3 person strike, 1370LL",
+    "name": "master_nightfall",
+    "description": "Master Nightfall - 3 person strike, 1590LL",
     "size": 3,
-    "lightLevel": "1345"
+    "lightLevel": "1590"
+  },
+  {
+    "name": "grandmaster_nightfall",
+    "description": "Grandmaster Nightfall - 3 person strike, 1575LL",
+    "size": 3,
+    "lightLevel": "1575"
+  },
+  {
+    "name": "other",
+    "description": "Freeform activity entry. Please include details like Light Level and people needed",
+    "size": 6,
+    "lightLevel": "1350"
   }
 ]
