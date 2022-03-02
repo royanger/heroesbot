@@ -129,7 +129,7 @@ module.exports = {
       });
 
       // change voice channel size to match event party size
-      channel.setUserLimit(9);
+      channel.setUserLimit(6);
       logger.info(`Changed ${channel.name} to size of ${partySize}`);
 
       // create rich embed
