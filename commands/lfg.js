@@ -105,7 +105,7 @@ module.exports = {
       });
       return;
     }
-
+    
     // check that the option was not just the message
     if (interaction.options.data[0].name === "message") {
       logger.info(`${Member.user.tag} entered only a 'message' option`);
