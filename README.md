@@ -4,13 +4,14 @@ This is a bot designed for the Helpless Heroes clan discord.
 
 ## Commands
 
-| Command      | Required Options                | Optional             | Results                                                       |
-| ------------ | ------------------------------- | -------------------- | ------------------------------------------------------------- |
-| `/commands`  |                                 |                      | List of all commands                                          |
-| `/lfg`       | `<event>: <current party size>` | `message: <message>` | Create an LFG post.                                           |
-| `/encounter` | `<activity>: <encounter>`       |                      | Create a message with details and images about the encounter. |
-| `/coinflip`  |                                 |                      | Random coin flip. Chance of easter egg.                       |
-| `/silliness` |                                 |                      | Want to spice up your encounters? Tempt fate.                 |
+| Command      | Required Options                                     | Results                                                       |
+| ------------ | ---------------------------------------------------- | ------------------------------------------------------------- |
+| `/commands`  |                                                      | List of all commands                                          |
+| `/lfg`       | `<event>: <current party size>` `message: <message>` | Create an LFG post.                                           |
+| `/reset`     |                                                      | Resets all channels to default size                           |
+| `/encounter` | `<activity>: <encounter>`                            | Create a message with details and images about the encounter. |
+| `/coinflip`  |                                                      | Random coin flip. Chance of easter egg.                       |
+| `/silliness` |                                                      | Want to spice up your encounters? Tempt fate.                 |
 
 ## Configuring the Bot
 
